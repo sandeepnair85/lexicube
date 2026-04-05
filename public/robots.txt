@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sandeepnair85.github.io/lexicube/sitemap.xml

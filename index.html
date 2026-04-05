@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Lexicube — Daily Rubik's Word Puzzle</title>
+  <meta name="description" content="A free daily word puzzle on a Rubik's cube. Unscramble the cube so every face spells words! New puzzle every day, Monday (easy) to Sunday (hard).">
+  <meta name="theme-color" content="#121213">
+  <meta name="keywords" content="lexicube, word puzzle, rubiks cube, daily puzzle, wordle, word game, cube puzzle, free game">
+  <link rel="canonical" href="https://sandeepnair85.github.io/lexicube/">
+
+  <!-- Open Graph (Facebook, LinkedIn, iMessage) -->
+  <meta property="og:title" content="Lexicube — Daily Rubik's Word Puzzle">
+  <meta property="og:description" content="A Wordle-like daily puzzle on a Rubik's cube. Unscramble letters, spell words, solve the cube!">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sandeepnair85.github.io/lexicube/">
+  <meta property="og:site_name" content="Lexicube">
+
+  <!-- Twitter/X Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Lexicube — Daily Rubik's Word Puzzle">
+  <meta name="twitter:description" content="A free daily word puzzle on a Rubik's cube. Monday = 1 move, Sunday = 7. Can you solve it at par?">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Lexicube",
+    "description": "A free daily word puzzle on a Rubik's cube. Unscramble the cube so every face spells words.",
+    "url": "https://sandeepnair85.github.io/lexicube/",
+    "applicationCategory": "Game",
+    "genre": "Puzzle",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@type": "Person", "name": "Sandeep Nair" }
+  }
+  </script>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧊</text></svg>">
+</head>
+<body>
+
+  <header class="header">
+    <h1>Lexicube</h1>
+    <div class="header-info">
+      <span id="puzzle-number"></span>
+      <span id="day-label"></span>
+      <span id="difficulty"></span>
+    </div>
+  </header>
+
+  <main class="game-container">
+
+    <!-- Target word square -->
+    <div class="target-display">
+      <h3>Target — make every face look like this</h3>
+      <div class="target-grid" id="target-grid"></div>
+    </div>
+
+    <!-- Stats bar -->
+    <div class="stats-bar">
+      <div class="stat">Your moves: <span class="stat-value" id="move-count">0</span></div>
+      <div class="stat">Optimal: <span class="stat-value" id="optimal-moves">0</span></div>
+      <div class="stat">Hints used: <span class="stat-value" id="hint-count">0</span></div>
+    </div>
+
+    <!-- 3D Cube -->
+    <div id="cube-container"></div>
+
+    <!-- 2D Net view (hidden by default) -->
+    <div id="net-container"></div>
+
+    <!-- Win banner -->
+    <div class="win-banner" id="win-banner">
+      <div class="win-rank-emoji"></div>
+      <h2 class="win-rank-title">Solved!</h2>
+      <p>
+        <span class="win-moves">0</span> moves &middot;
+        <span class="win-par"></span> &middot;
+        <span class="win-score"></span>
+      </p>
+      <p class="win-details">
+        <span class="win-time">0s</span> &middot;
+        <span class="win-hints">0</span> hints
+      </p>
+    </div>
+
+    <!-- Auto-solve banner (shown after 50 moves) -->
+    <div class="auto-solve-banner" id="auto-solve-banner">
+      <h2>Too many moves! Here's the solution:</h2>
+      <p class="auto-solve-info">You made <span class="auto-moves">50</span> moves on a <span class="auto-par"></span>-move puzzle.</p>
+      <div class="solution-steps" id="solution-steps"></div>
+      <p class="auto-solve-tip">Try again tomorrow with a fresh puzzle!</p>
+    </div>
+
+    <!-- Move buttons -->
+    <div id="move-buttons-container"></div>
+
+    <!-- Action buttons -->
+    <div class="controls">
+      <div class="action-buttons">
+        <button class="action-btn" id="undo-btn">Undo</button>
+        <button class="action-btn" id="reset-btn">Reset</button>
+        <button class="action-btn" id="hint-btn">Hint</button>
+        <button class="action-btn" id="view-toggle">2D View</button>
+        <button class="action-btn" id="help-btn">?</button>
+        <button class="action-btn primary" id="share-btn">Share</button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- How to Play Modal -->
+  <div class="modal-overlay" id="help-modal">
+    <div class="modal">
+      <h2>How to Play</h2>
+      <p>Unscramble the Rubik's cube so every face shows the <strong>target word grid</strong>.</p>
+
+      <div class="how-to-play">
+        <h3>The Goal</h3>
+        <ul>
+          <li>Each face of the cube has a <strong>3x3 grid of letters</strong></li>
+          <li>When solved, every row and column on every face spells a <strong>valid 3-letter word</strong></li>
+          <li>All 6 faces must show the <strong>same word grid</strong> with matching colors</li>
+        </ul>
+
+        <h3>How to Move</h3>
+        <ul>
+          <li><strong>Drag on a sticker</strong> to rotate that layer of the cube</li>
+          <li><strong>Drag on empty space</strong> to orbit/rotate your view</li>
+          <li>Or use the <strong>button controls</strong> below the cube</li>
+        </ul>
+
+        <h3>Daily Puzzle</h3>
+        <ul>
+          <li><strong>Monday = 1 move</strong> to solve (easy!)</li>
+          <li><strong>Sunday = 7 moves</strong> to solve (hard!)</li>
+          <li>Everyone gets the <strong>same puzzle</strong> each day</li>
+          <li>Try to solve it in the <strong>fewest moves</strong> — par = the minimum!</li>
+        </ul>
+
+        <h3>Tips</h3>
+        <ul>
+          <li>Use <strong>Hint</strong> to see how many moves away you are</li>
+          <li>Use <strong>Undo</strong> if you make a wrong move</li>
+          <li>The <strong>colors</strong> tell you which face each sticker belongs to</li>
+          <li><strong>Share</strong> your result to challenge friends!</li>
+        </ul>
+      </div>
+
+      <button class="close-btn" id="close-help">Got it!</button>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

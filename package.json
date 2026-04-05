@@ -1,0 +1,22 @@
+{
+  "name": "lexicube",
+  "version": "1.0.0",
+  "description": "A daily Rubik's cube word puzzle game",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "generate-squares": "node scripts/generate-squares.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "vite": "^6.0.0",
+    "vitest": "^3.0.0"
+  },
+  "dependencies": {
+    "three": "^0.183.2"
+  }
+}

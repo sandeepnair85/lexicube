@@ -1,0 +1,95 @@
+/* Cube viewport */
+
+.cube-viewport {
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.cube-canvas {
+  border-radius: 8px;
+  cursor: grab;
+  touch-action: none;
+}
+
+.cube-canvas:active {
+  cursor: grabbing;
+}
+
+/* Rotation group for animations */
+.rotation-group {
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+/* Move buttons */
+.move-buttons {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 4px;
+  justify-content: center;
+  width: 100%;
+  max-width: 440px;
+  padding: 0 8px;
+  box-sizing: border-box;
+}
+
+.move-group {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: center;
+}
+
+.move-label {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.move-btn-row {
+  display: flex;
+  gap: 3px;
+}
+
+.move-btn {
+  min-width: 28px;
+  width: 100%;
+  max-width: 36px;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-secondary);
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.move-btn:hover:not(:disabled) {
+  background: var(--border);
+  transform: scale(1.08);
+}
+
+.move-btn:active:not(:disabled) {
+  transform: scale(0.92);
+}
+
+.move-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.move-btn-prime {
+  background: #2a2a2b;
+}

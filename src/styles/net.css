@@ -1,0 +1,68 @@
+/* 2D Net view styles */
+
+.net-view {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.net-view.visible {
+  display: flex;
+}
+
+.net-row {
+  display: flex;
+}
+
+.net-face {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  padding: 1px;
+}
+
+.net-face.placeholder {
+  visibility: hidden;
+}
+
+.net-cell {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 2px;
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+.net-cell.face-u { background: #FFD500; color: #333; text-shadow: none; }
+.net-cell.face-d { background: #FFFFFF; color: #333; text-shadow: none; }
+.net-cell.face-f { background: #009B48; }
+.net-cell.face-b { background: #0045AD; }
+.net-cell.face-l { background: #FF5900; }
+.net-cell.face-r { background: #B90000; }
+
+.net-cell.valid-word {
+  box-shadow: inset 0 0 0 2px rgba(83, 141, 78, 0.9);
+}
+
+.net-label {
+  font-size: 10px;
+  color: var(--text-dim);
+  text-align: center;
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+}
+
+@media (max-width: 480px) {
+  .net-cell {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+  }
+}

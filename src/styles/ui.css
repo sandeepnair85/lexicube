@@ -1,0 +1,116 @@
+/* UI component styles — modals, tutorial */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+
+.modal-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 420px;
+  width: 90%;
+  max-height: 85vh;
+  overflow-y: auto;
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal h2 {
+  font-size: 22px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.modal > p {
+  color: var(--text-dim);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.modal .close-btn {
+  display: block;
+  margin: 20px auto 0;
+  padding: 10px 32px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.modal .close-btn:hover {
+  background: #4a7d44;
+}
+
+/* How to play section */
+.how-to-play {
+  margin: 8px 0;
+}
+
+.how-to-play h3 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent);
+  margin-top: 16px;
+  margin-bottom: 6px;
+}
+
+.how-to-play ul {
+  list-style: none;
+  padding: 0;
+}
+
+.how-to-play li {
+  color: var(--text-dim);
+  font-size: 13px;
+  margin-bottom: 6px;
+  line-height: 1.5;
+  padding-left: 16px;
+  position: relative;
+}
+
+.how-to-play li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+.how-to-play strong {
+  color: var(--text);
+}
+
+/* Help button style */
+#help-btn {
+  font-weight: 800;
+  font-size: 16px;
+  width: 36px;
+  padding: 8px 0;
+  text-align: center;
+}
