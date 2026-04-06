@@ -138,13 +138,15 @@ function init() {
     localStorage.setItem('lexicube-tutorial-seen', '1');
   }
 
-  // --- State change handler (for undo/reset direct updates) ---
+  // --- State change handler (for undo/reset — NOT for animated moves) ---
   game.onStateChange = (state, colorState, move) => {
     if (!move) {
+      // Direct update (undo/reset) — update visuals immediately
       cube3d.updateLetters(state, colorState);
+      net2d.update(state);
+      updateStats();
     }
-    net2d.update(state);
-    updateStats();
+    // Animated moves are handled by doMove's .then() callback
   };
 
   // --- Win handler ---

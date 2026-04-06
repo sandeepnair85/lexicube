@@ -5,3 +5,4 @@ dist/
 test-results/
 tests/e2e/*.png
 .claude/
+LAUNCH-GUIDE.md

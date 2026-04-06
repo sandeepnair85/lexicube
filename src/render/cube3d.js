@@ -379,8 +379,12 @@ export function createCube3D(container, onMoveCallback) {
         const e = 1 - Math.pow(1 - t, 3);
         pivot.quaternion.identity();
         pivot.rotateOnAxis(axis, finalAngle * e);
-        requestRender();
-        if (t < 1) { requestAnimationFrame(tick); return; }
+        if (t < 1) {
+          requestRender(); // only render mid-animation frames
+          requestAnimationFrame(tick);
+          return;
+        }
+        // Final frame: reparent, snap, and update textures BEFORE rendering
         for (const obj of [...pivot.children]) cubeGroup.attach(obj);
         pivot.removeFromParent();
         snapAllPositions();
